@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import * as getdata from '../../data/get-data';
 //const data = require('./api-euromillions.json');
 
-const data = req => {
-  axios
-    .get('https://nunofcguerreiro.com/api-euromillions-json.json')
-    .then(result => {
-      console.log(result)
-    });
-}
-
 class GetData extends Component {
+  constructor() {
+   super();
+   this.state = {
+     data: {},
+   };
+  }
+
+  componentDidMount() {
+    getdata.getLastResult().then(data => {
+      this.setState({data: data.drawns[0]})
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>{this.props.title}</h1>
-        <p>{data}</p>
-        <p>{data.numbers}</p>
+        <p>{this.state.data.date}</p>
+        <p>
+          <span>{this.state.data.numbers}</span> + <span>{this.state.data.stars}</span>
+        </p>
         <ul>
         {/* {data.map((num) => {
           return (
