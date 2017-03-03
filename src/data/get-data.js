@@ -6,5 +6,5 @@ Get last result
 
 export function getLastResult() {
   return axios.get('https://nunofcguerreiro.com/api-euromillions-json')
-    .then(response => response.data)
+    //.then(result => console.log(result.data))
 }
