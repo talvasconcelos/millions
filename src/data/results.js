@@ -8,7 +8,6 @@ const fs = require('fs');
 const numArray = Array.from(new Array(50),(val,index)=>index+1);
 const starArray = Array.from(new Array(12),(val,index)=>index+1);
 
-
 const dataNum = data.drawns.map(num => {
   return num.numbers.split(' ');
 });
@@ -161,5 +160,6 @@ function buildOutput() {
 
 
 }
+
 
 buildOutput();

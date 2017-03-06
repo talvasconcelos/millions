@@ -15,11 +15,13 @@ const NumBg = styled.div`
 `
 
 const Number = styled.span`
-  font-size: 1.25em;
+  font-size: 1.5em;
+  font-weight: 700;
   color: palevioletred;
 `
 const Star = styled.span`
-  font-size: 1.25em;
+  font-size: 1.5em;
+  font-weight: 700;
   color: palevioletred;
 `
 
@@ -32,7 +34,6 @@ function PossibleKey(props) {
           <NumBg key={i}>
             <Number>{num}</Number>
           </NumBg>
-
         )
       })}
       <strong>+</strong>
@@ -41,7 +42,6 @@ function PossibleKey(props) {
           <NumBg key={i+'star'}>
             <Star>{star}</Star>
           </NumBg>
-
         )
       })}
     </div>
