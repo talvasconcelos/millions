@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import * as getdata from '../../data/get-data';
 import _ from 'lodash';
 import moment from 'moment';
-import styled from 'styled-components'
+import styled from 'styled-components';
+
 // import components
 import PossibleKey from '../../components/PossibleKey/PossibleKey';
+import Loader from '../../components/Loader/Loader';
 
 
 // import possible results
-import pos from '../../data/all-possible-arr.json';
-let shuf = _.shuffle(pos);
+//import pos from '../../data/all-possible-arr.json';
+//let shuf = _.shuffle(pos);
 
 // Styled Components
 const Btn = styled.button`
@@ -36,18 +38,19 @@ class GetData extends Component {
       lastdraw: {},
       alldraws: [],
       bets: [],
-      showBets: true //_.sampleSize(shuf, 5)
+      isLoading: false,
+      showBets: false //_.sampleSize(shuf, 5)
     };
   }
 
   componentDidMount() {
     getdata.getLastResult().then((result) => {
-      this.setState({lastdraw: result.data.drawns[0], bets: _.sampleSize(shuf, 5)})
+      this.setState({lastdraw: result.data.drawns[0]})
     })
   }
 
-  getPossible() {
-    this.setState({bets: _.sampleSize(shuf, 5), showBets: true});
+  getMore() {
+    this.setState({bets: getdata.getPossible(5), showBets: true})
   }
 
   render() {
@@ -57,11 +60,10 @@ class GetData extends Component {
         <h3>{moment(this.state.lastdraw.date).format('LL')}</h3>
 
         <div><span>{this.state.lastdraw.numbers}</span> + <span>{this.state.lastdraw.stars}</span></div>
-        <Btn onClick={this.getPossible.bind(this)}>Generate</Btn>
+        <Btn onClick={this.getMore.bind(this)}>Generate</Btn>
         {/* {this.state.bets.map((bet, i) => {return (<PossibleKey key={i} bets={bet}/>)})} */}
         {this.state.showBets ? this.state.bets.map((bet, i) => {return (<PossibleKey key={this.state.bets[i].key} bets={bet}/>)})/*<PossibleKey bets={this.state.bets.map(bet => {})} />*/ : null}
-
-        <div>{this.props.children}</div>
+        <Loader isLoading={this.state.isLoading} />
       </div>
     );
   }
