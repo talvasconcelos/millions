@@ -19,12 +19,34 @@ export function getLastResult() {
 Get Possible result
 **/
 
+
+
 export function getPossible(n) {
-  let a
+
+  return new Promise (
+    function (resolve, reject) {
+      let a
+      let results = []
+
+      let combinator = comb.bigCombination(numArray, 5)
+      while ( a = combinator.next() )
+        results.push(a);
+
+      results = removeNotInRange(results)
+      results = removeSequence(results)
+      results = removeAllOddEven(results)
+      results = addKey(results)
+
+      results = _.shuffle(results)
+      resolve(_.sampleSize(results, n))
+      reject(console.error())
+    }
+  );
+  /*let a
   let results = []
 
   let combinator = comb.bigCombination(numArray, 5)
-  while ( a = combinator.next())
+  while ( a = combinator.next() )
     results.push(a);
 
   results = removeNotInRange(results)
@@ -34,7 +56,7 @@ export function getPossible(n) {
 
   results = _.shuffle(results)
 
-  return _.sampleSize(results, n)
+  return _.sampleSize(results, n)*/
 
 }
 
@@ -54,12 +76,12 @@ function removeAllOddEven(arr) {
   arr.map(cur => {
     let oddCount = 0;
     cur.forEach(el => {
-      el % 2 == 1 ? oddCount++ : null
+      el % 2 === 1 ? oddCount++ : null
       return oddCount
     })
     let evenCount = 0;
     cur.forEach(el => {
-      el % 2 == 0 ? evenCount++ : null
+      el % 2 === 0 ? evenCount++ : null
       return evenCount
     })
 
