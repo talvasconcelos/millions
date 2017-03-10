@@ -28,9 +28,15 @@ class Getlast extends Component {
   }
 
   date() {
-    let today = new Date().getTime()
+    function getNextDayOfWeek(date, dayOfWeek) {
+      // Code to check that date and dayOfWeek are valid left as an exercise ;)
 
-    return today
+      var resultDate = new Date(date.getTime());
+
+      resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
+
+      return resultDate;
+    }
   }
 
   render() {
