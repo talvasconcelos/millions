@@ -2,9 +2,33 @@ import axios from 'axios'
 import comb from 'js-combinatorics'
 import crypto from 'crypto'
 import _ from 'lodash'
+import cheerio from 'cheerio'
 
 const numArray = Array.from(new Array(50),(val,index)=>index+1)
 const starArray = Array.from(new Array(12),(val,index)=>index+1)
+
+/**
+Scrape prize
+**/
+
+export function getPrize() {
+  let reqData = {
+    prize: 'div.est-jackpot'
+  }
+  return axios.get('https://www.euro-millions.com/')
+    .then(response => {
+      let $ = cheerio.load(response.data)
+      let pageData = {}
+      Object.keys(reqData).forEach(k => {
+        pageData[k] = $(reqData[k]).text()
+      })
+      return (pageData)
+    })
+    .catch(error => {
+      console.error(error)
+    })
+
+}
 
 /**
 Get last result
@@ -12,7 +36,9 @@ Get last result
 
 export function getLastResult() {
   return axios.get('https://nunofcguerreiro.com/api-euromillions-json')
-    //.then(result => console.log(result.data))
+    .then(result => {
+      return result.data.drawns
+    })
 }
 
 /**
@@ -23,7 +49,7 @@ Get Possible result
 
 export function getPossible(n) {
 
-  return new Promise (
+  /*return new Promise (
     function (resolve, reject) {
       let a
       let results = []
@@ -41,8 +67,8 @@ export function getPossible(n) {
       resolve(_.sampleSize(results, n))
       reject(console.error())
     }
-  );
-  /*let a
+  );*/
+  let a
   let results = []
 
   let combinator = comb.bigCombination(numArray, 5)
@@ -56,7 +82,7 @@ export function getPossible(n) {
 
   results = _.shuffle(results)
 
-  return _.sampleSize(results, n)*/
+  return _.sampleSize(results, n)
 
 }
 

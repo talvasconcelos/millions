@@ -32,8 +32,8 @@ const Btn = styled.button`
 `
 
 class GetData extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       lastdraw: {},
       alldraws: [],
@@ -49,17 +49,20 @@ class GetData extends Component {
     })
   }
 
-  load() {
-    this.setState({isLoading: !this.state.isLoading})
-  }
-
-
   getMore() {
-    getdata.getPossible(5)
-      .then(result => {this.setState({bets: result, showBets: !this.state.showBets})})
-    //this.state.isLoading ? console.log(this.state.isLoading) : console.log(this.state.isLoading)
+    // this.setState((state, props) => ({
+    //   isLoading: !state.isLoading
+    // }));
+    this.setState((state, props) => ({
+      bets: getdata.getPossible(5)
+    }));
     //getdata.getPossible(5)
-    //  .then(result => {this.setState({bets: result, showBets: !this.state.showBets})})
+    //  .then(result => {
+    //    this.setState({bets: result})
+    //  })
+    this.setState((state, props) => ({
+      showBets: !state.showBets
+    }));
   }
 
 
@@ -75,7 +78,7 @@ class GetData extends Component {
         <h1>{this.props.title}</h1>
         <h3>{moment(this.state.lastdraw.date).format('LL')}</h3>
         <div><span>{this.state.lastdraw.numbers}</span> + <span>{this.state.lastdraw.stars}</span></div>
-        <Btn onClick={this.handleClick.bind(this)}>Generate</Btn>
+        <Btn onClick={this.getMore.bind(this)}>Generate</Btn>
         {/* {this.state.bets.map((bet, i) => {return (<PossibleKey key={i} bets={bet}/>)})} */}
         <Loader show={this.state.isLoading} />
         {this.state.showBets ? this.state.bets.map((bet, i) => {return (<PossibleKey key={this.state.bets[i].key} bets={bet}/>)})/*<PossibleKey bets={this.state.bets.map(bet => {})} />*/ : null}

@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
-import logo from '../../images/logo.svg';
-import './App.css';
+import styled from 'styled-components';
+
+//kuler colors
+// primary: #69FF60
+// secondary: #39B232
+// cta: #FF5453 or #B21F75
 
 //import components
+import Getlast from '../../containers/Getlast/Getlast';
 import GetData from '../../containers/GetData/GetData';
+
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 35vh;
+  padding: 20px;
+  background: #69FF60;
+`
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <GetData title='Last Draw' />
+      <div>
+        <Header>
+          <Getlast />
+        </Header>
       </div>
     );
   }
