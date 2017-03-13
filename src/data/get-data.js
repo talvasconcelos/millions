@@ -13,14 +13,15 @@ Scrape prize
 
 export function getPrize() {
   let reqData = {
-    prize: 'div.est-jackpot'
+    prize: '.nextDraw span.value',
+    dateNext: 'span.date'
   }
-  return axios.get('https://www.euro-millions.com/')
+  return axios.get('https://www.jogossantacasa.pt/web/JogarEuromilhoes/')
     .then(response => {
       let $ = cheerio.load(response.data)
       let pageData = {}
       Object.keys(reqData).forEach(k => {
-        pageData[k] = $(reqData[k]).text()
+        pageData[k] = $(reqData[k]).first().text()
       })
       return (pageData)
     })
