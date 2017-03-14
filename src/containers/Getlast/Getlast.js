@@ -3,20 +3,11 @@ import * as getdata from '../../data/get-data'
 import styled from 'styled-components'
 import moment from 'moment'
 
+import Timer from '../../components/Timer/Timer'
+
 const Title = styled.h1`
   font-size: 2.5em;
-`
-
-const Timer = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 3.5em;
-  background: #39B232;
+  margin-bottom: 1em;
 `
 
 class Getlast extends Component {
@@ -26,11 +17,6 @@ class Getlast extends Component {
       prizeVal: '€0',
       lastDraw: {},
       nextDraw: '',
-      timer: ''
-      //days: '',
-      //hours: '',
-      //minutes: '',
-      //seconds: ''
     }
   }
 
@@ -48,7 +34,10 @@ class Getlast extends Component {
       () => this.countDown(),
       1000
     )
-    //nextDraw.isBefore(moment(this.state.today).subtract(1, 'day')) ? this.countDown : displayDate
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
   }
 
   countDown() {
@@ -66,12 +55,9 @@ class Getlast extends Component {
       <div>
         <h4>Next prize prediction</h4>
         <Title>{this.state.prizeVal}</Title>
-        <Timer>
-          <span key='d'>{moment.duration(this.state.timer).days()} Days</span>
-          <span key='h'>{moment.duration(this.state.timer).hours()} Hours</span>
-          <span key='m'>{moment.duration(this.state.timer).minutes()} Minutes</span>
-          <span key='s'>{moment.duration(this.state.timer).seconds()} Seconds</span>
-        </Timer>
+        <strong>Next Draw:</strong>
+        <Timer diff={this.state.timer} next={this.state.nextDraw}/>
+        <div>{this.state.lastDraw.numbers} + {this.state.lastDraw.stars}</div>
       </div>
     )
   }

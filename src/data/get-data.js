@@ -73,7 +73,7 @@ export function getPossible(n) {
   let results = []
 
   let combinator = comb.bigCombination(numArray, 5)
-  while ( a = combinator.next() )
+  while ( a === combinator.next() )
     results.push(a);
 
   results = removeNotInRange(results)
