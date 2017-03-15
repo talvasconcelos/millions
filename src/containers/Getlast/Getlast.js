@@ -7,7 +7,10 @@ import Timer from '../../components/Timer/Timer'
 
 const Title = styled.h1`
   font-size: 2.5em;
-  margin-bottom: 1em;
+
+  @media (min-width: 480px) {
+    font-size: 4em;
+  }
 `
 
 class Getlast extends Component {
@@ -21,14 +24,14 @@ class Getlast extends Component {
   }
 
   componentDidMount() {
-    getdata.getPrize().then((result) => {
-      let date = result.dateNext.match(/(\d{1,2}.\d{2}.\d{4})/g)
-      date = moment(date, 'DD/MM/YYYY').add(19, 'hours')
-      this.setState({prizeVal: result.prize.split(' '), nextDraw: date})
-    })
-    getdata.getLastResult().then(result => {
-      this.setState({lastDraw: result[0]})
-    })
+
+    getdata.getPrize().then(output => {
+      this.setState({prizeVal: output.split(' ')})
+    })    
+
+    //getdata.getLastResult().then(result => {
+    //  this.setState({lastDraw: result[0]})
+    //})
 
     this.timerID = setInterval(
       () => this.countDown(),
