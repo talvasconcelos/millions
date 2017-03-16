@@ -25,7 +25,6 @@ const Btn = styled.button`
   border-radius: 3px;
   filter: drop-shadow(0px 0px 8px rgba(0,0,0,0.6));
   transition: all 0.2s ease;
-
   &:hover {
     filter: drop-shadow(0px 0px 12px rgba(0,0,0,0.6));
   }
@@ -44,9 +43,7 @@ class GetData extends Component {
   }
 
   componentDidMount() {
-    getdata.getLastResult().then((result) => {
-      this.setState({lastdraw: result.data.drawns[0]})
-    })
+
   }
 
   getMore() {
@@ -75,9 +72,6 @@ class GetData extends Component {
   render() {
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        <h3>{moment(this.state.lastdraw.date).format('LL')}</h3>
-        <div><span>{this.state.lastdraw.numbers}</span> + <span>{this.state.lastdraw.stars}</span></div>
         <Btn onClick={this.getMore.bind(this)}>Generate</Btn>
         {/* {this.state.bets.map((bet, i) => {return (<PossibleKey key={i} bets={bet}/>)})} */}
         <Loader show={this.state.isLoading} />

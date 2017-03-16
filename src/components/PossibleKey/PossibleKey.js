@@ -14,7 +14,7 @@ const NumBg = styled.div`
   border: 1px solid palevioletred;
 `
 
-const Number = styled.span`
+const Num = styled.span`
   font-size: 1.5em;
   font-weight: 700;
   color: palevioletred;
@@ -32,7 +32,7 @@ function PossibleKey(props) {
       {props.bets.numbers.map((num, i, arr) => {
         return (
           <NumBg key={i}>
-            <Number>{num}</Number>
+            <Num>{num}</Num>
           </NumBg>
         )
       })}

@@ -20,6 +20,7 @@ class Getlast extends Component {
       prizeVal: '€0',
       lastDraw: {},
       nextDraw: '',
+      timer: 0
     }
   }
 
@@ -27,11 +28,9 @@ class Getlast extends Component {
 
     getdata.getPrize().then(output => {
       this.setState({prizeVal: output.split(' ')})
-    })    
+    })
 
-    //getdata.getLastResult().then(result => {
-    //  this.setState({lastDraw: result[0]})
-    //})
+    this.setState({nextDraw: getdata.closest_tuesday_or_friday()})
 
     this.timerID = setInterval(
       () => this.countDown(),
@@ -58,9 +57,7 @@ class Getlast extends Component {
       <div>
         <h4>Next prize prediction</h4>
         <Title>{this.state.prizeVal}</Title>
-        <strong>Next Draw:</strong>
         <Timer diff={this.state.timer} next={this.state.nextDraw}/>
-        <div>{this.state.lastDraw.numbers} + {this.state.lastDraw.stars}</div>
       </div>
     )
   }

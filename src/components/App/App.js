@@ -7,8 +7,9 @@ import styled from 'styled-components';
 // cta: #FF5453 or #B21F75
 
 //import components
-import Getlast from '../../containers/Getlast/Getlast';
 import GetData from '../../containers/GetData/GetData';
+import Getlast from '../../containers/Getlast/Getlast';
+import Bets from '../../containers/Bets/Bets';
 
 const Header = styled.div`
   display: flex;
@@ -21,6 +22,11 @@ const Header = styled.div`
   background: #69FF60;
 `
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
 class App extends Component {
   render() {
     return (
@@ -28,7 +34,11 @@ class App extends Component {
         <Header>
           <Getlast />
         </Header>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div className='container'>
+          <Container>
+            <Bets />
+          </Container>
+        </div>
       </div>
     );
   }

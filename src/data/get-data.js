@@ -1,8 +1,6 @@
-import axios from 'axios'
 import comb from 'js-combinatorics'
 import crypto from 'crypto'
 import _ from 'lodash'
-import cheerio from 'cheerio'
 import YQL from 'yqlp'
 
 const numArray = Array.from(new Array(50),(val,index)=>index+1)
@@ -20,92 +18,49 @@ export function getPrize() {
     })
 }
 
-/*function closest_tuesday_or_friday() {
-  var today = new Date(), tuesday, friday, day, closest;
+export function closest_tuesday_or_friday() {
 
-  if(today.getDay() == 2 || today.getDay() == 5){
-    if(today.getHours() < 22){
-      return today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate();
+  let today = new Date(), tuesday, friday, day, closest
+
+  if (today.getDay() === 2 || today.getDay() === 5) {
+    if (today.getHours() < 20) {
+      console.log(today)
+      return today.setHours(20)
     }
-  }else{
-    day = today.getDay();
-    tuesday = today.getDate() - day + (day === 0 ? -6 : 2);
-    friday = today.getDate() - day + (day === 0 ? -6 : 5);
   }
 
-  if(tuesday < friday){
-    closest = new Date(today.setDate(tuesday));
-  }else{
-    closest = new Date(today.setDate(friday));
-  }
-  return closest.getFullYear() + "/" + (closest.getMonth() + 1) + "/" + closest.getDate();
+  day = today.getDay()
+  tuesday = today.getDate() - day + (day === 0 ? -6 : 2)
+  friday = today.getDate() - day + (day === 0 ? -6 : 5)
+
+  closest = tuesday > friday ? new Date(today.setDate(tuesday)) : new Date(today.setDate(friday))
+
+  return closest.setHours(20)
+
 }
-
-console.log(closest_tuesday_or_friday());*/
-
-// export function getPrize2() {
-//   let reqData = {
-//     prize: '.nextDraw span.value',
-//     dateNext: 'span.date'
-//   }
-//   return axios.get('https://www.jogossantacasa.pt/web/JogarEuromilhoes/')
-//     .then(response => {
-//       let $ = cheerio.load(response.data)
-//       let pageData = {}
-//       Object.keys(reqData).forEach(k => {
-//         pageData[k] = $(reqData[k]).first().text()
-//       })
-//       return (pageData)
-//     })
-//     .catch(error => {
-//       console.error(error)
-//     })
-//
-// }
 
 /**
 Get last result
 **/
 
-export function getLastResult() {
-  return axios.get('https://nunofcguerreiro.com/api-euromillions-json')
-    .then(result => {
-      return result.data.drawns
-    })
-}
+// export function getLastResult() {
+//   return axios.get('https://nunofcguerreiro.com/api-euromillions-json')
+//     .then(result => {
+//       return result.data.drawns
+//     })
+// }
 
 /**
 Get Possible result
 **/
 
-
-
 export function getPossible(n) {
 
-  /*return new Promise (
-    function (resolve, reject) {
-      let a
-      let results = []
-
-      let combinator = comb.bigCombination(numArray, 5)
-      while ( a = combinator.next() )
-        results.push(a);
-
-      results = removeNotInRange(results)
-      results = removeSequence(results)
-      results = removeAllOddEven(results)
-      results = addKey(results)
-
-      results = _.shuffle(results)
-      resolve(_.sampleSize(results, n))
-      reject(console.error())
-    }
-  );*/
   let a
   let results = []
 
   let combinator = comb.bigCombination(numArray, 5)
-  while ( a === combinator.next() )
+  while ( a = combinator.next() )
     results.push(a);
 
   results = removeNotInRange(results)
