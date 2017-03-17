@@ -151,12 +151,24 @@ function buildOutput() {
     return finalObj
   })
 
-  
+  let a = _.chunk(finalObj, 20000)
 
-  fs.writeFile('./all-possible-arr.json', JSON.stringify(finalObj, null, 2), 'utf8', (err) => {
-  if (err) throw err;
-  console.log('It\'s saved!');
-  });
+  a.map((cur, i) => {
+    fs.writeFile('./all-possible-' + i + '.json', JSON.stringify(cur, null, 2), 'utf8', (err) => {
+    if (err) throw err;
+    console.log('It\'s saved!', i);
+    });
+  })
+
+
+
+
+
+
+  //fs.writeFile('./all-possible-arr.json', JSON.stringify(finalObj, null, 2), 'utf8', (err) => {
+  //if (err) throw err;
+  //console.log('It\'s saved!');
+  //});
   //console.log(finalObj)
 
 

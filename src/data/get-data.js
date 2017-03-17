@@ -57,7 +57,10 @@ Get Possible result
 **/
 
 export function getPossible(n) {
-  return axios.get('data/all-possible-arr.json')
+  let min = Math.ceil(0);
+  let max = Math.floor(5);
+  let random = Math.floor(Math.random() * (max - min)) + min;
+  return axios.get('data/all-possible-' + random + '.json')
     .then(result => {
       return _.sampleSize(result.data, n)
     })
