@@ -2,17 +2,18 @@ const comb = require('js-combinatorics');
 const crypto = require('crypto');
 
 const _ = require('lodash');
-const data = require('./api-euromillions.json');
+//const data = require('./api-euromillions.json');
 const fs = require('fs');
 
 const numArray = Array.from(new Array(50),(val,index)=>index+1);
 const starArray = Array.from(new Array(12),(val,index)=>index+1);
 
-const dataNum = data.drawns.map(num => {
-  return num.numbers.split(' ');
-});
+//const dataNum = data.drawns.map(num => {
+//  return num.numbers.split(' ');
+//});
 
 const test1 = [[12, 5, 8, 130, 44], [2, 4, 6, 8, 10], [1, 5, 7, 9, 11], [12, 5, 8, 130, 44]];
+
 
 function allPossible() {
   let a;
@@ -150,7 +151,7 @@ function buildOutput() {
     return finalObj
   })
 
-
+  
 
   fs.writeFile('./all-possible-arr.json', JSON.stringify(finalObj, null, 2), 'utf8', (err) => {
   if (err) throw err;

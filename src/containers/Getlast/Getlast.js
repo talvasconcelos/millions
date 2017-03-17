@@ -43,9 +43,8 @@ class Getlast extends Component {
   }
 
   countDown() {
-    let time = moment()
+    let time = moment().valueOf()
     let diff = this.state.nextDraw - time
-    //console.log(duration.seconds())
     this.setState({
       timer: diff
     })

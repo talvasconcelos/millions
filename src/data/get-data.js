@@ -1,10 +1,13 @@
-import comb from 'js-combinatorics'
-import crypto from 'crypto'
+//import comb from 'js-combinatorics'
+//import crypto from 'crypto'
+import axios from 'axios'
 import _ from 'lodash'
 import YQL from 'yqlp'
 
-const numArray = Array.from(new Array(50),(val,index)=>index+1)
-const starArray = Array.from(new Array(12),(val,index)=>index+1)
+//const numArray = Array.from(new Array(50),(val,index)=>index+1)
+//const starArray = Array.from(new Array(12),(val,index)=>index+1)
+
+//const possible = require('./all-possible-arr.json')
 
 /**
 Scrape prize
@@ -24,8 +27,7 @@ export function closest_tuesday_or_friday() {
 
   if (today.getDay() === 2 || today.getDay() === 5) {
     if (today.getHours() < 20) {
-      console.log(today)
-      return today.setHours(20)
+      return today.setHours(20,0,0,0)
     }
   }
 
@@ -35,7 +37,7 @@ export function closest_tuesday_or_friday() {
 
   closest = tuesday > friday ? new Date(today.setDate(tuesday)) : new Date(today.setDate(friday))
 
-  return closest.setHours(20)
+  return closest.setHours(20,0,0,0)
 
 }
 
@@ -55,6 +57,13 @@ Get Possible result
 **/
 
 export function getPossible(n) {
+  return axios.get('data/all-possible-arr.json')
+    .then(result => {
+      return _.sampleSize(result.data, n)
+    })
+}
+
+/*export function getPossible2(n) {
 
   let a
   let results = []
@@ -155,4 +164,4 @@ function addKey(arg) {
   })
 
   return finalObj
-}
+}*/

@@ -7,7 +7,6 @@ import styled from 'styled-components';
 // cta: #FF5453 or #B21F75
 
 //import components
-import GetData from '../../containers/GetData/GetData';
 import Getlast from '../../containers/Getlast/Getlast';
 import Bets from '../../containers/Bets/Bets';
 

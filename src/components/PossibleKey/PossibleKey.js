@@ -1,50 +1,55 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const NumBg = styled.div`
-  display: inline-flex;
+const NumRow = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.75em auto;
+`
+
+const Bg = styled.div`
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  background: ${props => props.star ? '#39B232' : props.number ? '#69FF60' : 'none'}
+  width: 2em;
+  height: 2em;
   border-radius: 50%;
-  padding: 0.5em;
-  margin: 0.5em;
-  background: papayawhip;
-  border: 1px solid palevioletred;
+  margin: ${props => props.plus ? '-10px' : '2px'};
 `
 
 const Num = styled.span`
-  font-size: 1.5em;
-  font-weight: 700;
-  color: palevioletred;
+  flex: 1 1 auto;
 `
-const Star = styled.span`
-  font-size: 1.5em;
-  font-weight: 700;
-  color: palevioletred;
-`
+
 
 
 function PossibleKey(props) {
   return (
-    <div key={props.bets.key + 'num'}>
+    <NumRow key={props.bets.key + 'num'}>
       {props.bets.numbers.map((num, i, arr) => {
         return (
-          <NumBg key={i}>
-            <Num>{num}</Num>
-          </NumBg>
+          <Bg number key={i}>
+            <Num key={i}>{num}</Num>
+          </Bg>
+
         )
       })}
-      <strong>+</strong>
+      <Bg plus ><Num>+</Num></Bg>
       {props.bets.stars.map((star, i, arr) => {
         return (
-          <NumBg key={i+'star'}>
-            <Star>{star}</Star>
-          </NumBg>
+          <Bg star key={i}>
+            <Num key={i+'star'}>{star}</Num>
+          </Bg>
+
         )
       })}
-    </div>
+    </NumRow>
   )
 }
 
