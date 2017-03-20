@@ -35,7 +35,7 @@ export function closest_tuesday_or_friday() {
     return (today.isoWeekday() === 2) ? friday : tuesday.add(1, 'week')
   }
 
-  return today.isoWeekday() > 5 ? tuesday.add(1, 'week') : friday
+  return today.isoWeekday() > 5 ? tuesday.add(1, 'week') : today.isoWeekday() < 2 ? tuesday : friday
 
 
   // let today = moment().unix()

@@ -36,6 +36,10 @@ h5 {
   max-width: 640px;
 }
 
+.center-text {
+  text-align: center;
+}
+
 @media (min-width: 640px) {
   html {
     font-size: 18px;
@@ -49,11 +53,11 @@ h5 {
 
 /* Spiner */
 .overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  height: 150vh;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -61,8 +65,9 @@ h5 {
 }
 .overlay p {
   display: block;
-  position: relative;
-  top: 60%;
+  position: fixed;
+  width: 100%;
+  top: 60vh;
   text-align: center;
   color: papayawhip;
   font-size: 1.25em;
@@ -73,8 +78,8 @@ h5 {
   height: 5vh;
   border-radius: 50%;
   background: papayawhip;
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 50vh;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -93,8 +98,8 @@ h5 {
   border-right: solid 1.3vh rgba(223,223,194,0);
   border-left: solid 1.3vh rgba(223,223,194,0);
   border-bottom: solid 1.3vh rgba(223,223,194,0);
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 50vh;
   left: 50%;
   -webkit-transform: translate(-50%, -50%) rotate(360deg);
           transform: translate(-50%, -50%) rotate(360deg);
@@ -281,15 +286,22 @@ h5 {
   70% {
     width: 2vh;
     height: 2vh;
+    background: papayawhip;
     -webkit-transform: translate(50%, -50%);
             transform: translate(50%, -50%);
   }
+
+  71% {
+    background: tomato;
+  }
+
   75% {
     width: 2vh;
     height: 2px;
     -webkit-transform: translate(50%, -50%);
             transform: translate(50%, -50%);
   }
+
   80% {
     width: 2vh;
     height: 2vh;

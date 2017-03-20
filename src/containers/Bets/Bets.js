@@ -42,7 +42,7 @@ class Bets extends Component {
         {this.state.bets.map((bet, i) => {return (<PossibleKey key={this.state.bets[i].key} bets={bet}/>)})}
         {/* {!this.state.isLoading ? this.state.bets.map((bet, i) => {return (<PossibleKey key={this.state.bets[i].key} bets={bet}/>)}) : null} */}
         <Button onClick={this.handleClick.bind(this)}>Generate</Button>
-        <p><small>Click the button to generate some winning keys for your next Euromillions bet.</small></p>
+        <p className='center-text'><small>Click the button to generate some winning keys for your next Euromillions bet.</small></p>
       </div>
     )
   }
