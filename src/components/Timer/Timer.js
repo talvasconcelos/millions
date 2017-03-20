@@ -20,7 +20,7 @@ const Digit = styled.span`
 
 const Timer = props => (
   <Block>
-    { Math.floor(moment.duration(props.diff).asHours()) > 24 ?
+    { Math.floor(moment.duration(props.diff).asHours()) >= 24 ?
       <Digit key='d'>Draw {moment(props.next).fromNow()}</Digit> :
       <div>
         <Digit key='h'>{Math.floor(moment.duration(props.diff).asHours())}h&nbsp;:</Digit>

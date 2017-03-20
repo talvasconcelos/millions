@@ -38,14 +38,15 @@ function allPossible() {
 
   results = removeNumGroup(results);
 
-  console.log(results.length);
+  console.log('numgroup: ',results.length);
+
 
 
   /*fs.writeFile('./all-possible.json', JSON.stringify(results, null, 2), 'utf8', (err) => {
   if (err) throw err;
   console.log('It\'s saved!');
   });*/
-  return results;
+  return _.shuffle(results);
 
 }
 
@@ -84,15 +85,15 @@ function removeAllOddEven(arr) {
 }
 
 let removeNumGroup = (arr) => {
-  let output = [];
-  let reg = /(1[0-9]).{8}|(2[0-9]).{8}|(3[0-9]).{8}|(4[0-9]).{8}/;
 
-  function W(arg) {
-    return !reg.test(arg)
-  }
-
-  let f = arr.filter(W)
-  return f;
+  let reg = /(?:1[0-9]\S|]){3,}|(?:2[0-9]\S|]){3,}|(?:3[0-9]\S|]){3,}|(?:4[0-9]\S|]){3,}/;
+  let output = []
+  arr.map((cur, i, array) => {
+    //console.log(reg.test(cur.toString()))
+    if (!reg.test(cur.toString()))
+      return output.push(cur)
+  })
+  return output
 }
 
 
@@ -151,10 +152,10 @@ function buildOutput() {
     return finalObj
   })
 
-  let a = _.chunk(finalObj, 20000)
+  let a = _.chunk(finalObj, 18000)
 
   a.map((cur, i) => {
-    fs.writeFile('./all-possible-' + i + '.json', JSON.stringify(cur, null, 2), 'utf8', (err) => {
+    fs.writeFile('../../public/data/all-possible-' + i + '.json', JSON.stringify(cur), 'utf8', (err) => {
     if (err) throw err;
     console.log('It\'s saved!', i);
     });

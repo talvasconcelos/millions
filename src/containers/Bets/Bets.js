@@ -18,11 +18,20 @@ class Bets extends Component {
   }
 
   handleClick() {
+    this.setState((prevState, props) => ({
+      isloading: true
+    }))
     getdata.getPossible(5).then(result => {
       this.setState((prevState, props) => ({
         bets: result
       }))
     })
+    .then((done) => {
+      this.setState((prevState, props) => ({
+        isloading: false
+      }))
+    }
+    )
 
   }
 

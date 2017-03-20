@@ -3,6 +3,7 @@
 import axios from 'axios'
 import _ from 'lodash'
 import YQL from 'yqlp'
+import moment from 'moment'
 
 //const numArray = Array.from(new Array(50),(val,index)=>index+1)
 //const starArray = Array.from(new Array(12),(val,index)=>index+1)
@@ -23,21 +24,40 @@ export function getPrize() {
 
 export function closest_tuesday_or_friday() {
 
-  let today = new Date(), tuesday, friday, day, closest
+  let today = moment()
+  let tuesday = moment().isoWeekday(2)
+  let friday = moment().isoWeekday(5)
 
-  if (today.getDay() === 2 || today.getDay() === 5) {
-    if (today.getHours() < 20) {
-      return today.setHours(20,0,0,0)
+  if (today.isoWeekday() === 2 || today.isoWeekday() === 5) {
+    if (today.hour() < 20) {
+      return today
     }
+    return (today.isoWeekday() === 2) ? friday : tuesday.add(1, 'week')
   }
 
-  day = today.getDay()
-  tuesday = today.getDate() - day + (day === 0 ? -6 : 2)
-  friday = today.getDate() - day + (day === 0 ? -6 : 5)
+  return today.isoWeekday() > 5 ? tuesday.add(1, 'week') : friday
 
-  closest = tuesday > friday ? new Date(today.setDate(tuesday)) : new Date(today.setDate(friday))
 
-  return closest.setHours(20,0,0,0)
+  // let today = moment().unix()
+  //
+  // today
+  //
+  // let today = new Date(), tuesday, friday, day, closest
+  //
+  // if (today.getDay() === 2 || today.getDay() === 5) {
+  //   if (today.getHours() < 20) {
+  //     return today.setHours(20,0,0,0)
+  //   }
+  //   return today
+  // }
+  //
+  // day = today.getDay()
+  // tuesday = today.getDate() - day + (day === 0 ? -6 : 2)
+  // friday = today.getDate() - day + (day === 0 ? -6 : 5)
+  //
+  // closest = tuesday > friday ? new Date(today.setDate(tuesday)) : new Date(today.setDate(friday))
+  //
+  // return closest.setHours(20,0,0,0)
 
 }
 
@@ -58,10 +78,11 @@ Get Possible result
 
 export function getPossible(n) {
   let min = Math.ceil(0);
-  let max = Math.floor(5);
+  let max = Math.floor(42);
   let random = Math.floor(Math.random() * (max - min)) + min;
   return axios.get('data/all-possible-' + random + '.json')
     .then(result => {
+      console.log('Using file ' + random + 'of', max)
       return _.sampleSize(result.data, n)
     })
 }

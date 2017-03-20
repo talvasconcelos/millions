@@ -30,7 +30,9 @@ class Getlast extends Component {
       this.setState({prizeVal: output.split(' ')})
     })
 
-    this.setState({nextDraw: getdata.closest_tuesday_or_friday()})
+    let next = getdata.closest_tuesday_or_friday().hour(20).minute(0).seconds(0)
+    
+    this.setState({nextDraw: next})
 
     this.timerID = setInterval(
       () => this.countDown(),
