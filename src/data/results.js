@@ -40,6 +40,16 @@ function allPossible() {
 
   console.log('numgroup: ',results.length);
 
+  function checkN(el) {
+    return el === [6,10,19,29,36]
+  }
+
+  let dede = results.map(cur => {
+    cur.every(checkN)
+  })
+
+  dede ? console.log(dede) : null
+
 
 
   /*fs.writeFile('./all-possible.json', JSON.stringify(results, null, 2), 'utf8', (err) => {
@@ -152,14 +162,15 @@ function buildOutput() {
     return finalObj
   })
 
-  let a = _.chunk(finalObj, 18000)
 
-  a.map((cur, i) => {
-    fs.writeFile('../../public/data/all-possible-' + i + '.json', JSON.stringify(cur), 'utf8', (err) => {
-    if (err) throw err;
-    console.log('It\'s saved!', i);
-    });
-  })
+  //let a = _.chunk(finalObj, 18000)
+
+  //a.map((cur, i) => {
+  //  fs.writeFile('../../public/data/all-possible-' + i + '.json', JSON.stringify(cur), 'utf8', (err) => {
+  //  if (err) throw err;
+  //  console.log('It\'s saved!', i);
+  //  });
+  //})
 
 
 

@@ -9,6 +9,9 @@ import styled from 'styled-components';
 //import components
 import Getlast from '../../containers/Getlast/Getlast';
 import Bets from '../../containers/Bets/Bets';
+import Share from '../Share/Share';
+import Copy from '../Copy/Copy';
+
 
 const Header = styled.div`
   display: flex;
@@ -19,6 +22,7 @@ const Header = styled.div`
   padding: 2.5em 0 5em;
   width: 100%;
   background: #69FF60;
+  color: black;
 `
 
 const Container = styled.div`
@@ -37,6 +41,13 @@ class App extends Component {
           <Container>
             <Bets />
           </Container>
+        </div>
+        <hr/>
+        <div className='container'>
+          <Share />
+        </div>
+        <div className='container'>
+          <Copy />
         </div>
       </div>
     );

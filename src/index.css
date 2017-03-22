@@ -14,7 +14,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto Condensed', sans-serif;
-  line-height: 1.6;
+  line-height: 1.5;
+  color: #5e6778;
 }
 
 h1,
@@ -23,24 +24,27 @@ h3,
 h4,
 h5 {
   font-family: 'Oswald', sans-serif;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 h4,
 h5 {
   font-weight: 700;
+  margin-bottom: 0.25em;
 }
 
 .container {
   width: 90%;
   margin: 2em auto;
-  max-width: 640px;
+  max-width: 30em;
 }
 
 .center-text {
   text-align: center;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 30em) {
   html {
     font-size: 18px;
   }
@@ -48,6 +52,12 @@ h5 {
   .container {
     width: 70%;
   }
+}
+
+hr {
+  height: 1px;
+  border: 0px;
+  background-color: gainsboro;
 }
 
 
@@ -320,4 +330,93 @@ h5 {
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
   }
+}
+
+/*
+Share Buttons (http://sharingbuttons.io/)
+*/
+.resp-sharing-button__link,
+.resp-sharing-button__icon {
+  display: inline-block;
+}
+
+.resp-sharing-button__link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  margin: 0.5em 1em 0.5em 0;
+  min-width: calc(30% - 1em);
+  vertical-align: middle;
+}
+
+.resp-sharing-button {
+  border-radius: 3px;
+  text-align: center;
+  transition: 25ms ease-out;
+  padding: 0.5em 0.75em;
+  font-size: 1.25em;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.resp-sharing-button__icon svg {
+  width: 1.25em;
+  height: 1.125em;
+  margin-right: 0.4em;
+  vertical-align: middle;
+}
+
+.resp-sharing-button--small svg {
+  margin: 0;
+  vertical-align: middle;
+}
+
+/* Non solid icons get a stroke */
+.resp-sharing-button__icon {
+  stroke: #fff;
+  fill: none;
+}
+
+/* Solid icons get a fill */
+.resp-sharing-button__icon--solid,
+.resp-sharing-button__icon--solidcircle {
+  fill: #fff;
+  stroke: none;
+}
+
+.resp-sharing-button--twitter {
+  background-color: #55acee;
+}
+
+.resp-sharing-button--twitter:hover {
+  background-color: #2795e9;
+}
+
+.resp-sharing-button--facebook {
+  background-color: #3b5998;
+}
+
+.resp-sharing-button--facebook:hover {
+  background-color: #2d4373;
+}
+
+.resp-sharing-button--facebook {
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+
+.resp-sharing-button--facebook:hover,
+.resp-sharing-button--facebook:active {
+  background-color: #2d4373;
+  border-color: #2d4373;
+}
+
+.resp-sharing-button--twitter {
+  background-color: #55acee;
+  border-color: #55acee;
+}
+
+.resp-sharing-button--twitter:hover,
+.resp-sharing-button--twitter:active {
+  background-color: #2795e9;
+  border-color: #2795e9;
 }

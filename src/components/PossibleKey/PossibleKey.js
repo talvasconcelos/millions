@@ -7,9 +7,10 @@ const NumRow = styled.div`
   justify-content: space-around;
   align-items: center;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 700;
   margin: 0.75em auto;
+  color: black;
 `
 
 const Bg = styled.div`

@@ -7,6 +7,8 @@ import Timer from '../../components/Timer/Timer'
 
 const Title = styled.h1`
   font-size: 2.5em;
+  margin-top: 0;
+  margin-bottom: 0;
 
   @media (min-width: 480px) {
     font-size: 4em;
@@ -31,7 +33,7 @@ class Getlast extends Component {
     })
 
     let next = getdata.closest_tuesday_or_friday().hour(20).minute(0).seconds(0)
-    
+
     this.setState({nextDraw: next})
 
     this.timerID = setInterval(

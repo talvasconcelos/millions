@@ -15,6 +15,19 @@ class Bets extends Component {
   }
 
   componentDidMount() {
+    this.setState((prevState, props) => ({
+      isloading: true
+    }))
+    getdata.getPossible(1).then(result => {
+      this.setState((prevState, props) => ({
+        bets: result
+      }))
+    })
+    .then((done) => {
+      this.setState((prevState, props) => ({
+        isloading: false
+      }))
+    })
   }
 
   handleClick() {
@@ -30,8 +43,7 @@ class Bets extends Component {
       this.setState((prevState, props) => ({
         isloading: false
       }))
-    }
-    )
+    })
 
   }
 
@@ -41,7 +53,7 @@ class Bets extends Component {
         {this.state.isloading ? <Loader /> : null}
         {this.state.bets.map((bet, i) => {return (<PossibleKey key={this.state.bets[i].key} bets={bet}/>)})}
         {/* {!this.state.isLoading ? this.state.bets.map((bet, i) => {return (<PossibleKey key={this.state.bets[i].key} bets={bet}/>)}) : null} */}
-        <Button onClick={this.handleClick.bind(this)}>Generate</Button>
+        <Button bg='tomato' onClick={this.handleClick.bind(this)}>Generate</Button>
         <p className='center-text'><small>Click the button to generate some winning keys for your next Euromillions bet.</small></p>
       </div>
     )
